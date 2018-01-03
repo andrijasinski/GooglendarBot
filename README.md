@@ -11,7 +11,7 @@ _*This repository contains source code for the project in "Artificial Intelligen
 * PIP package manager
 
 ## Installation:
-If you have freshly pulled the source code from repository you will need to install externa packages by running:
+If you have freshly pulled the source code from the repository you will need to install external packages by running:
 
 ```
 $ cd AI2017HW7
