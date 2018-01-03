@@ -15,6 +15,12 @@ try:
 except ImportError:
     flags = None
 
+# If modifying these scopes, delete your previously saved credentials
+# at ~/.credentials/calendar-python-quickstart.json
+SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
+CLIENT_SECRET_FILE = 'resources/client_secret.json'
+APPLICATION_NAME = 'Google Calendar API Python Quickstart'
+
 def get_credentials():
     """Gets valid user credentials from storage.
 
@@ -43,7 +49,12 @@ def get_credentials():
         print('Storing credentials to ' + credential_path)
     return credentials
 
-def nextTen():
+def getNextTen():
+    """Shows basic usage of the Google Calendar API.
+
+    Creates a Google Calendar API service object and outputs a list of the next
+    10 events on the user's calendar.
+    """
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('calendar', 'v3', http=http)
@@ -54,10 +65,15 @@ def nextTen():
         calendarId='primary', timeMin=now, maxResults=10, singleEvents=True,
         orderBy='startTime').execute()
     events = eventsResult.get('items', [])
-    return events
-    # if not events:
-    #     print('No upcoming events found.')
-    # for event in events:
-    #     start = event['start'].get('dateTime', event['start'].get('date'))
-    #     print(start, event['summary'])
 
+    if not events:
+        print('No upcoming events found.')
+    for event in events:
+        start = event['start'].get('dateTime', event['start'].get('date'))
+        print(start, event['summary'])
+        
+    return events
+
+
+if __name__ == '__main__':
+    getNextTen()
