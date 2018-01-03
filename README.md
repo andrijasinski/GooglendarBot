@@ -16,9 +16,9 @@ If you have freshly pulled the source code from the repository you will need to 
 ```
 $ cd AI2017HW7
 $ pip install -r requirements.txt
-$ python chatterbot.py
+$ python src/chatterbot.py
 ```
 If you want to use GUI, then for the last command run:
 ```
-$ python chatterbot_gui.py
+$ python src/chatterbot_gui.py
 ```
