@@ -14,8 +14,7 @@ EVENT_PATTERN = utills.to_pattern(EVENT)
 def getResponse(orig_text):
     text = standartize(orig_text)
     response = "?"
-    if NEED_TO_CHECK:
-        NEED_TO_CHECK = utills.check_login()
+    utills.check_login()
 
     if re.match("!.+", text):
         utills.special_request(text)
