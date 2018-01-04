@@ -19,7 +19,7 @@ except ImportError:
 # at ~/.credentials/calendar-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
 CLIENT_SECRET_FILE = 'resources/client_secret.json'
-APPLICATION_NAME = 'Google Calendar API Python Quickstart'
+APPLICATION_NAME = 'AI2017HW7'
 
 def get_credentials():
     """Gets valid user credentials from storage.
