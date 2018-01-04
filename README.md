@@ -25,10 +25,14 @@ $ pip install -r requirements.txt
 
 CLI:
 ```
-$ python src/chatterbot.py
+$ cd src
+$ python chatterbot.py
 ```
 
 GUI:
 ```
-$ python src/chatterbot_gui.py
+$ cd src
+$ python chatterbot_gui.py
 ```
+
+_NB! Entering "src" directory is required, otherwise exception will be raised._

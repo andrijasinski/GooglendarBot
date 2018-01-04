@@ -9,6 +9,13 @@ def special_request(text):
     
     return
 
+def event_request(text):
+    events = my_calendar.getNextTen()
+
+    
+
+    return 
+
 def to_pattern(strings): # Regular expression from list of strings
     s = ''
     for string in strings:
