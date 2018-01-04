@@ -48,20 +48,26 @@ def get_credentials():
         # print('Storing credentials to ' + credential_path)
     return credentials
 
-def getNextTen():
-    """Shows basic usage of the Google Calendar API.
+def open_connection():
+    """
+    Shows basic usage of the Google Calendar API.
 
-    Creates a Google Calendar API service object and outputs a list of the next
-    10 events on the user's calendar.
+    Creates a Google Calendar API service object.
     """
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('calendar', 'v3', http=http)
+    return service
+
+def get_next(service, max):
+    """ Outputs a list of the next
+    "max" events on the user's calendar.
+    """
 
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
     # print('Getting the upcoming 10 events')
     eventsResult = service.events().list(
-        calendarId='primary', timeMin=now, maxResults=10, singleEvents=True,
+        calendarId='primary', timeMin=now, maxResults=max, singleEvents=True,
         orderBy='startTime').execute()
     events = eventsResult.get('items', [])
 

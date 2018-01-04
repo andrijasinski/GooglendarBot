@@ -1,2 +1,4 @@
-##Google API Python Client
+## Google API Python Client
 google-api-python-client
+## python-dateutil
+python-dateutil

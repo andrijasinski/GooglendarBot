@@ -11,6 +11,9 @@ GREETING = ["tere", "hallo", "hola", "tere paevast", "tsau"]
 GREETING_PATTERN = utills.to_pattern(GREETING)
 EVENT = ["plaanid", "plaan", "plan", "tegevus", "tegevused", "teen"]
 EVENT_PATTERN = utills.to_pattern(EVENT)
+DAYS = ["tana", "homme", "ulehomme", "jargmisel"
+    , "esmaspaev", "teisipaev", "kolmapaev", "neljapaev", "reede", "laupaev", "laupaeval", "puhapaev"]
+DAYS_PATTERN = utills.to_pattern(DAYS)
 INTRODUCTION = ["mina", "olen", "nimi"]
 INTRODUCTION_PATTERN = utills.to_pattern(INTRODUCTION)
 
@@ -29,10 +32,10 @@ def getResponse(orig_text):
     elif re.search(INTRODUCTION_PATTERN, text):
         if len(possible_name) > 1:
             FRAME['user_name'] = possible_name[1]
-        elif possible_name[0].lower() not in user_introduction:
+        elif possible_name[0].lower() not in INTRODUCTION:
             FRAME['user_name'] = possible_name[0]
         response = "Tere {0}, meeldiv tutvuda.".format(FRAME['user_name'])
-    elif re.search(EVENT_PATTERN, text):
+    elif re.search(EVENT_PATTERN, text) or re.search(DAYS_PATTERN, text):
         response = utills.event_request(text)
     elif ASKED_FOR_NAME:
         FRAME['user_name'] = possible_name[0]
