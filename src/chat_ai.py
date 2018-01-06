@@ -3,7 +3,6 @@
 
 import re
 import utills
-import runpy
 
 NEED_TO_CHECK = True
 FRAME = {'user_name' : ''}
@@ -26,7 +25,7 @@ def getResponse(orig_text):
 
     possible_name = re.findall("[A-ZÕÜŠŽÄÖ][\S]+", orig_text)
     if re.match("!.+", text):
-        utills.special_request(text)
+        response = utills.special_request(text)
     elif re.search(GREETING_PATTERN, text):
         response = "Kuidas Teie nimi on?"
         ASKED_FOR_NAME = True
@@ -42,12 +41,6 @@ def getResponse(orig_text):
         FRAME['user_name'] = possible_name[0]
         ASKED_FOR_NAME = False
         response = "Tere {0}, meeldiv tutvuda.".format(FRAME['user_name'])
-
-    # Calling the WAWKI
-    elif re.search("kabe|kabet", text):
-        #response = exec(open("checkers.py").read())
-        runpy.run_path("checkers.py")
-        response = "Loodan, et sulle meeldis minuga mängida!"
     return response
 
 def standartize(text):
