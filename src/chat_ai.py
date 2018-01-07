@@ -11,8 +11,7 @@ GREETING = ["tere", "hallo", "hola", "tere paevast", "tsau"]
 GREETING_PATTERN = utills.to_pattern(GREETING)
 EVENT = ["plaanid", "plaan", "plan", "tegevus", "tegevused", "teen"]
 EVENT_PATTERN = utills.to_pattern(EVENT)
-DAYS = ["tana", "homme", "ulehomme", "jargmisel"
-    , "esmaspaev", "teisipaev", "kolmapaev", "neljapaev", "reede", "laupaev", "laupaeval", "puhapaev"]
+DAYS = ["tana", "homme", "ulehomme", "esmaspaev", "teisipaev", "kolmapaev", "neljapaev", "reede", "laupaev", "puhapaev"]
 DAYS_PATTERN = utills.to_pattern(DAYS)
 INTRODUCTION = ["mina", "olen", "nimi"]
 INTRODUCTION_PATTERN = utills.to_pattern(INTRODUCTION)

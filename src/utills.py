@@ -50,7 +50,7 @@ def special_request(text):
             response = "Olete edukalt välja logitud."
         else:
             response = "Välja logimine ebaõnnestus."
-    elif re.search(to_pattern(['kabe', 'kabet', 'checkers']), text):
+    elif re.search(to_pattern(['kabe', 'checkers']), text):
         runpy.run_path("./checkers.py")
         response = "Loodan, et sulle meeldis minuga mängida!"
     
@@ -96,7 +96,7 @@ def spell_day(day):
     res = ''
     if day == 'puhapaev':
         trigger = day
-    elif re.search(to_pattern(['paev']), day):
+    elif re.search(to_pattern(['paev', 'reede']), day):
         trigger = 'paev'
     else:
         trigger = day
@@ -106,6 +106,8 @@ def spell_day(day):
         res = ''.join(day)
     if 'paev' in trigger:
         res += "al"
+    elif day == 'reede':
+        res = 'reedel'
         # data = getDictFromJson(u'http://prog.keeleressursid.ee/ws_etmrf/syntees.php?c=ad&s=' + res).encode('utf-8')
         # File "C:\Users\Andri\AppData\Local\Programs\Python\Python36-32\lib\http\client.py", line 1117, in putrequest
         # self._output(request.encode('ascii'))
@@ -139,7 +141,7 @@ def logout():
             return True
         except:
             return False
-
+    return False
     
 def getDictFromJson(url):
     file = urllib.request.urlopen(url)
