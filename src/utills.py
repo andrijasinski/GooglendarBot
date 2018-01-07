@@ -69,6 +69,8 @@ def event_request(text):
                 event_datetime = dateutil.parser.parse(event['start']['dateTime'])
                 if event_datetime.day == obj.day and event_datetime.month == obj.month and event_datetime.year == obj.year:
                     result.append(event)
+    if day_of_interest == '':
+        return 'Palun täpsustage mis päeva kohta soovite infot saada.'
     return generate_response(result, day_of_interest)
 
 def generate_response(events, day):
