@@ -112,6 +112,7 @@ def spell_day(day):
         # File "C:\Users\Andri\AppData\Local\Programs\Python\Python36-32\lib\http\client.py", line 1117, in putrequest
         # self._output(request.encode('ascii'))
         # UnicodeEncodeError: 'ascii' codec can't encode character '\xe4' in position 39: ordinal not in range(128)
+        # võimalik põhjus on täppitähed
     return res
 
 def check_login():

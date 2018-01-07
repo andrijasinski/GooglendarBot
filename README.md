@@ -6,8 +6,8 @@ _*This repository contains source code for the project in "Artificial Intelligen
 * [Authors](#authors)
 * [Requirements](#requirements)
 * [Installation](#installation)
-* [How to run](#How-to-run)
-* [How to use](#How-to-use)
+* [How to run](#how-to-run)
+* [How to use](#how-to-use)
 
 ## Description:
 This project is a part of "Artificial Intelligence" course. Our chatbot allows you to get information about your plans/events in Google Calendar just by asking "What are my plans for tomorrow?" or any other question, containing keyword corresponding to your needs (more about that in "How to use" section). Fortunately, with this chatbot, you can play checkers in case you get bored. Just type "!checkers" and enjoy!
@@ -88,3 +88,6 @@ Commands:
 
 * !logout - logout and delete all credentials
 * !checkers OR !kabe - play checkers with AI
+
+
+_NB! This repository contains code for GUI solutions ("chatterbot\_gui.py", "checkers,py") provided by "Artificial Intelligence" course teaching staff._
