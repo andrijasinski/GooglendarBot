@@ -4,6 +4,10 @@ import my_calendar
 import datetime
 import dateutil.parser
 import runpy
+import arrow
+import urllib.request
+import json
+import shutil
 
 def to_pattern(strings): # Regular expression from list of strings
     s = ''
@@ -17,13 +21,18 @@ FRAME = {"events": []}
 DAYS = ["tana", "homme", "ulehomme", 
     "esmaspaev", "teisipaev", "kolmapaev", "neljapaev", "reede", "laupaev", "laupaeval", "puhapaev"]
 DAYS_PATTERN = to_pattern(DAYS)
-## TODO add a solution to have dynamical datetime objects for every next day of week. Ex:
-## "esmaspaev": datetime.datetime.now() +/- smth 
-## or any other way
+
 DAYS_DATETIME_RELATIONS = {
     "tana": datetime.datetime.now(),
     "homme": datetime.datetime.now() + datetime.timedelta(days=1),
-    "ulehomme": datetime.datetime.now() + datetime.timedelta(days=2)
+    "ulehomme": datetime.datetime.now() + datetime.timedelta(days=2),
+    "esmaspaev": arrow.utcnow().shift(weekday=0).naive,
+    "teisipaev": arrow.utcnow().shift(weekday=1).naive,
+    "kolmapaev": arrow.utcnow().shift(weekday=2).naive,
+    "neljapaev": arrow.utcnow().shift(weekday=3).naive,
+    "reede": arrow.utcnow().shift(weekday=4).naive,
+    "laupaev": arrow.utcnow().shift(weekday=5).naive,
+    "puhapaev": arrow.utcnow().shift(weekday=6).naive
 }
 
 DAYS_SPELL_RELATIONS = {
@@ -37,7 +46,10 @@ DAYS_SPELL_RELATIONS = {
 def special_request(text):
     response = ''
     if re.search(to_pattern(['logout']), text):
-        pass
+        if logout():
+            response = "Olete edukalt välja logitud."
+        else:
+            response = "Välja logimine ebaõnnestus."
     elif re.search(to_pattern(['kabe', 'kabet', 'checkers']), text):
         runpy.run_path("./checkers.py")
         response = "Loodan, et sulle meeldis minuga mängida!"
@@ -83,7 +95,7 @@ def spell_day(day):
     trigger = ''
     res = ''
     if day == 'puhapaev':
-        trigger = 'puhapaev'
+        trigger = day
     elif re.search(to_pattern(['paev']), day):
         trigger = 'paev'
     else:
@@ -92,6 +104,12 @@ def spell_day(day):
         day = list(day)
         day[v] = k
         res = ''.join(day)
+    if 'paev' in trigger:
+        res += "al"
+        # data = getDictFromJson(u'http://prog.keeleressursid.ee/ws_etmrf/syntees.php?c=ad&s=' + res).encode('utf-8')
+        # File "C:\Users\Andri\AppData\Local\Programs\Python\Python36-32\lib\http\client.py", line 1117, in putrequest
+        # self._output(request.encode('ascii'))
+        # UnicodeEncodeError: 'ascii' codec can't encode character '\xe4' in position 39: ordinal not in range(128)
     return res
 
 def check_login():
@@ -111,3 +129,19 @@ def check_login():
             return True
     elif FRAME["events"] == []:
         FRAME["events"] = my_calendar.get_next(my_calendar.open_connection(), 100)
+
+def logout():
+    home_dir = os.path.expanduser('~')
+    credential_dir = os.path.join(home_dir, '.credentials')
+    if os.path.exists(credential_dir):
+        try:
+            shutil.rmtree(credential_dir)
+            return True
+        except:
+            return False
+
+    
+def getDictFromJson(url):
+    file = urllib.request.urlopen(url)
+    data = json.loads(file.read().decode())
+    return data
