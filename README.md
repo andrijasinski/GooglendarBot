@@ -1,4 +1,4 @@
-# AI2017HW7
+# GooglendarBot
 
 _*This repository contains source code for the project in "Artificial Intelligence" course at the University of Tartu.*_
 
